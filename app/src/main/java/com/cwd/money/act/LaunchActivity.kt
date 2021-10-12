@@ -9,11 +9,17 @@ import com.cwd.money.databinding.ActivityLaunchBinding
 
 class LaunchActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityLaunchBinding
+    private var binding:ActivityLaunchBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLaunchBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }
