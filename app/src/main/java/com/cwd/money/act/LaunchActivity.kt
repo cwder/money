@@ -5,6 +5,7 @@ import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import com.cwd.money.R
 import com.cwd.money.databinding.ActivityLaunchBinding
+import com.cwd.money.utils.Util
 
 
 class LaunchActivity : AppCompatActivity() {
@@ -14,7 +15,8 @@ class LaunchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLaunchBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
+        //生命周期
+        binding?.myView?.let { lifecycle.addObserver(it) }
 
     }
 
