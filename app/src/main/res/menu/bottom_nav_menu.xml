@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_home"
+        android:enabled="true"
+        android:icon="@drawable/home_24dp"
+        android:title="首页"
+        app:showAsAction="always"
+         />
+
+    <item
+        android:id="@+id/item_favorite"
+        android:enabled="true"
+        android:icon="@drawable/favorite_24dp"
+        android:title="精选"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/item_earth"
+        android:enabled="true"
+        android:icon="@drawable/earth_24dp"
+        android:title="全球"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/item_accessibility"
+        android:enabled="true"
+        android:icon="@drawable/accessibility_24dp"
+        android:title="单项"
+        app:showAsAction="always"/>
+</menu>
