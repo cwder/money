@@ -1,5 +1,6 @@
 package com.cwd.money.act
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.commit
@@ -14,14 +15,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-        initF()
+
     }
 
-    fun initF(){
-       supportFragmentManager.commit {
-           add(R.id.fragment,LaunchFragment())
-       }
-    }
+
 
     override fun onDestroy() {
         super.onDestroy()

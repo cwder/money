@@ -75,7 +75,7 @@ class CenterView : BaseView{
 
 //        画五角星
         paint?.setStrokeWidth(2f);
-        paint?.setColor(Color.YELLOW);
+        paint?.setColor(Color.RED);
         paint?.setStyle(Paint.Style.FILL);
         val path =  Path();
         path.moveTo(a[0].toFloat(), a[1].toFloat());

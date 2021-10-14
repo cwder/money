@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.cwd.money.databinding.FragTabBinding
 
-class TabFragment:Fragment() {
+class MainFragment:Fragment() {
 
     private var _bind:FragTabBinding? = null
 
