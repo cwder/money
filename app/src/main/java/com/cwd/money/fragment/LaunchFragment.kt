@@ -5,13 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.cwd.money.databinding.FragmentLaunchBinding
+import com.cwd.money.databinding.FragLaunchBinding
 
-class LaunchFragment : Fragment{
-    constructor() : super()
-    constructor(contentLayoutId: Int) : super(contentLayoutId)
-
-    private var _binding:FragmentLaunchBinding? = null
+class LaunchFragment : Fragment(){
+    private var _binding:FragLaunchBinding? = null
 
     private val binding
                 get() = _binding!!
@@ -26,7 +23,8 @@ class LaunchFragment : Fragment{
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentLaunchBinding.inflate(inflater)
+        _binding = FragLaunchBinding.inflate(inflater)
+
         binding.myView.let {
             lifecycle.addObserver(it)
         }
