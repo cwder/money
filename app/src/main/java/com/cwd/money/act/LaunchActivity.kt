@@ -25,7 +25,7 @@ class LaunchActivity : AppCompatActivity() {
             override fun handleMessage(msg: Message) {
                 block()
             }
-        }.sendEmptyMessageDelayed(1,3000)
+        }.sendEmptyMessageDelayed(1,100)
     }
 
 
