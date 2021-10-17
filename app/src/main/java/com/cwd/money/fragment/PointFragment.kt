@@ -5,21 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.viewbinding.ViewBinding
-import com.cwd.money.databinding.FragEarthBinding
+import com.cwd.money.databinding.FragPointBinding
 
-class EarthFragment : Fragment() {
-    private var _bind: FragEarthBinding? = null
+class PointFragment:Fragment() {
+
+    private var _bind:FragPointBinding? = null
 
     private val bind
-        get() = _bind!!
+                get() = _bind!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _bind = FragEarthBinding.inflate(inflater)
+        _bind = FragPointBinding.inflate(inflater)
         val view = bind.root
         return view
     }

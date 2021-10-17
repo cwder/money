@@ -5,21 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.cwd.money.databinding.FragAccessibilityBinding
+import androidx.viewbinding.ViewBinding
+import com.cwd.money.databinding.FragEarthBinding
 
-class AccessibilityFragment:Fragment() {
+open class BaseFragment: Fragment {
 
-    private var _bind:FragAccessibilityBinding? = null
+    private var _bind:ViewBinding?
+
+    constructor(bind:ViewBinding?):super(){
+        _bind = bind
+    }
 
     private val bind
-                get() = _bind!!
+        get() = _bind!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _bind = FragAccessibilityBinding.inflate(inflater)
+        _bind = FragEarthBinding.inflate(inflater)
         val view = bind.root
         return view
     }
@@ -28,4 +33,12 @@ class AccessibilityFragment:Fragment() {
         super.onDestroy()
         _bind = null
     }
+
+
+
+//    init{
+//        var _bind: ViewBinding? = viewBinding
+//    }
+//    private var _bind: ViewBinding? = viewBinding
+
 }
