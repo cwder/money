@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/item_accessibility"
+        android:id="@+id/item_single"
         android:enabled="true"
-        android:icon="@drawable/accessibility_24dp"
+        android:icon="@drawable/single_24dp"
         android:title="单股"
         app:showAsAction="always"/>
 
