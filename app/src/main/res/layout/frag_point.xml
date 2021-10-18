@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="share"
-            type="com.cwd.money.request.bean.Share" />
+            name="shareVm"
+            type="com.cwd.money.vm.ShareViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +42,7 @@
             android:gravity="left|center"
             android:paddingLeft="5dp"
             android:hint="代码1"
-            android:text="@{share.code}"
+            android:text="@{shareVm.share.code}"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toStartOf="@id/add"
