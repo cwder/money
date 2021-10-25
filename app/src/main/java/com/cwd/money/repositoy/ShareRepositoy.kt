@@ -5,6 +5,6 @@ import com.cwd.money.request.bean.Share
 
 class ShareRepositoy {
     suspend fun getShare(code:String): Share {
-        return IApiService.getApi().requestGetShare()
+        return IApiService.service.requestGetShare()
     }
 }
