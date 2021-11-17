@@ -55,9 +55,18 @@ android {
 
 dependencies {
 
+    ext{
+        set("kotlin_version","1.5.21")
+        set("kotlin_coroutines_version","1.5.0")
+        set("datastore","1.0.0")
+        set("nav_version","2.3.5")
+        set("fragment_version","1.3.6")
+        set("retrofit_version","2.9.0")
+    }
+
    // implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
-    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
-    implementation ("androidx.datastore:datastore-preferences:$datastore")
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${ext["kotlin_version"]}")
+    implementation ("androidx.datastore:datastore-preferences:${ext["datastore"]}")
     implementation ("androidx.core:core-ktx:1.3.1")
     implementation ("androidx.appcompat:appcompat:1.2.0")
     implementation ("com.google.android.material:material:1.2.1")
@@ -65,11 +74,11 @@ dependencies {
     testImplementation ("junit:junit:4.+")
     androidTestImplementation ("androidx.test.ext:junit:1.1.2")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.3.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
-    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
-    implementation("androidx.fragment:fragment-ktx:$fragment_version")
-    implementation ("com.squareup.retrofit2:retrofit:$retrofit_version")
+    implementation("androidx.navigation:navigation-fragment-ktx:${ext["nav_version"]}")
+    implementation("androidx.navigation:navigation-ui-ktx:${ext["nav_version"]}")
+    implementation("androidx.fragment:fragment-ktx:${ext["fragment_version"]}")
+    implementation ("com.squareup.retrofit2:retrofit:${ext["retrofit_version"]}")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:$retrofit_version")
+    implementation ("com.squareup.retrofit2:converter-gson:${ext["retrofit_version"]}")
 
 }
