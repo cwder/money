@@ -5,10 +5,15 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import com.cwd.money.databinding.ActivityLaunchBinding
 import com.cwd.money.utils.startActivity
 import androidx.compose.material.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.tooling.preview.Preview
+
 class LaunchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLaunchBinding
@@ -18,20 +23,23 @@ class LaunchActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.composeView.apply {
             setContent {
-                MaterialTheme {
-                    Text("Hello Compose!")
-                }
+                centerView()
             }
         }
-//        binding.root?.composeView?.setContent {
-//            title()
-//        }
 
     }
 
+
+    @Preview
     @Composable
-    fun title(){
-        Text("aa")
+    fun centerView(){
+        Row(verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+            ){
+            Text("Hello Compose!")
+            Text("aaaa")
+        }
+
     }
 
     fun sleep(block:()->Unit){
