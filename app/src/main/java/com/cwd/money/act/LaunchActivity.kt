@@ -1,7 +1,6 @@
 package com.cwd.money.act
 
 import android.graphics.Color.BLACK
-import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -22,6 +21,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Red
+import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
@@ -56,7 +56,7 @@ class LaunchActivity : AppCompatActivity() {
         Row(verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
             ){
-            canvasTest()
+            canvas()
         }
     }
 
@@ -79,19 +79,18 @@ class LaunchActivity : AppCompatActivity() {
     @Composable
     fun canvasTest(){
         Canvas(modifier = Modifier.size(200.dp), onDraw = {
-            //val paint = Paint()
-            val width = size.width
+            drawIntoCanvas {
+                val p = Paint()
+                translate(size.width/2f,size.height/2f){
+                    it.drawRect(
+                        left = 0f,
+                        top = 0f,
+                        right = 50f,
+                        bottom = 50f,
+                        paint = p
+                    )
+                }
 
-            val height = size.height
-            Log.e("aaa",width.toString())
-            Log.e("aaa",height.toString())
-            translate(width/2f,height/2f){
-                drawLine(
-                    start = Offset(x = width, y = 0f),
-                    end = Offset(x = 0f, y = height),
-                    color = Color.Blue,
-                    strokeWidth = 5F
-                )
             }
 
 
