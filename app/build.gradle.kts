@@ -18,7 +18,7 @@ android {
 
     defaultConfig {
         applicationId  = "com.cwd.money"
-        minSdkVersion(16)
+        minSdkVersion(21)
         targetSdkVersion(31)
         versionCode = 1
         versionName = "1.0"
@@ -51,6 +51,22 @@ android {
     dataBinding {
         isEnabled =  true
     }
+
+    buildFeatures{
+        compose = true
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+        useIR = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.0.1"
+        kotlinCompilerVersion="1.5.21"
+    }
+
+
 }
 
 dependencies {
@@ -62,13 +78,16 @@ dependencies {
         set("nav_version","2.3.5")
         set("fragment_version","1.3.6")
         set("retrofit_version","2.9.0")
+        set("retrofit_version","2.9.0")
+        set("compose_version","1.0.1")
     }
 
    // implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${ext["kotlin_version"]}")
     implementation ("androidx.datastore:datastore-preferences:${ext["datastore"]}")
     implementation ("androidx.core:core-ktx:1.3.1")
-    implementation ("androidx.appcompat:appcompat:1.2.0")
+    // 1.3.0以下 java.lang.IllegalStateException: ViewTreeLifecycleOwner not found
+    implementation ("androidx.appcompat:appcompat:1.3.0")
     implementation ("com.google.android.material:material:1.2.1")
     implementation ("androidx.constraintlayout:constraintlayout:2.0.1")
     testImplementation ("junit:junit:4.+")
@@ -80,5 +99,11 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:${ext["retrofit_version"]}")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:${ext["retrofit_version"]}")
+    implementation ("androidx.compose.runtime:runtime:${ext["compose_version"]}")
+    implementation ("androidx.compose.ui:ui:${ext["compose_version"]}")
+    implementation  ("androidx.compose.material:material:${ext["compose_version"]}")
+    implementation ("androidx.compose.ui:ui-tooling-preview:${ext["compose_version"]}")
+    implementation ("androidx.activity:activity-compose:1.3.0-alpha06")
+    implementation ("androidx.compose.runtime:runtime-livedata:${ext["compose_version"]}")
 
 }
