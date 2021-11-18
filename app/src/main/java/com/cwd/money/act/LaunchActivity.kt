@@ -23,7 +23,7 @@ class LaunchActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.composeView.apply {
             setContent {
-                centerView()
+                centerLayout()
             }
         }
 
@@ -32,14 +32,20 @@ class LaunchActivity : AppCompatActivity() {
 
     @Preview
     @Composable
-    fun centerView(){
+    fun centerLayout(){
         Row(verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
             ){
-            Text("Hello Compose!")
-            Text("aaaa")
+            centerView()
         }
+    }
 
+
+    @Preview
+    @Composable
+    fun centerView(){
+        Text("Hello Compose!")
+        Text("aaaa")
     }
 
     fun sleep(block:()->Unit){
