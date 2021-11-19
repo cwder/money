@@ -1,12 +1,10 @@
 package com.cwd.money.act
 
-import android.graphics.Color.BLACK
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -23,10 +21,7 @@ import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.drawscope.rotate
-import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.graphics.drawscope.*
 
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -54,8 +49,7 @@ class LaunchActivity : AppCompatActivity() {
     @Composable
     fun centerLayout(){
         Row(verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-            ){
+            horizontalArrangement = Arrangement.Center){
             canvas()
         }
     }
@@ -76,33 +70,10 @@ class LaunchActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    @Composable
-    fun canvasTest(){
-        Canvas(modifier = Modifier.size(200.dp), onDraw = {
-            drawIntoCanvas {
-                val p = Paint()
-                translate(size.width/2f,size.height/2f){
-                    it.drawRect(
-                        left = 0f,
-                        top = 0f,
-                        right = 50f,
-                        bottom = 50f,
-                        paint = p
-                    )
-                }
-
-            }
-
-
-
-
-        })
-    }
 
     @Composable
     fun canvas(){
         Canvas(modifier = Modifier.size(200.dp), onDraw = {
-            //val paint = Paint()
             val width = size.width
             val canvasHeight = size.height
             translate(width/2f,canvasHeight/2f){
@@ -110,7 +81,7 @@ class LaunchActivity : AppCompatActivity() {
                 val r = 72
                 val aa = 2 * Math.PI / 360
 
-                rotate(-90f){
+                rotate(-90f,pivot = Offset(0f,0f)){
                     val  a = arrayOf((Math.cos(0 * aa) * t),  (Math.sin(0 * aa) * t));
                     val  b = arrayOf((Math.cos(r * aa) * t), (Math.sin(r * aa) * t));
                     val  c = arrayOf((Math.cos(r * 2 * aa) * t),  (-Math.sin(r * 2 * aa) * t))
@@ -171,7 +142,39 @@ class LaunchActivity : AppCompatActivity() {
                     val d1 = arrayOf( (Math.cos(rr * 7 * aa) * tt), (Math.sin(rr * 7 * aa) * tt));
                     val e1 = arrayOf( (Math.cos(rr * 9 * aa) * tt), (Math.sin(rr * 9 * aa) * tt));
 
+                    drawLine(
+                        color = Black,
+                        start = Offset(0f, 0f),
+                        end = Offset(a1[0].toFloat(), a1[1].toFloat()),
+                        strokeWidth = Stroke.HairlineWidth
+                    )
+                    drawLine(
+                        color = Black,
+                        start = Offset(0f, 0f),
+                        end = Offset(b1[0].toFloat(), b1[1].toFloat()),
+                        strokeWidth = Stroke.HairlineWidth
+                    )
 
+                    drawLine(
+                        color = Black,
+                        start = Offset(0f, 0f),
+                        end = Offset(c1[0].toFloat(), c1[1].toFloat()),
+                        strokeWidth = Stroke.HairlineWidth
+                    )
+
+                    drawLine(
+                        color = Black,
+                        start = Offset(0f, 0f),
+                        end = Offset(d1[0].toFloat(), d1[1].toFloat()),
+                        strokeWidth = Stroke.HairlineWidth
+                    )
+
+                    drawLine(
+                        color = Black,
+                        start = Offset(0f, 0f),
+                        end = Offset(e1[0].toFloat(), e1[1].toFloat()),
+                        strokeWidth = Stroke.HairlineWidth
+                    )
                 }
             }
         })
