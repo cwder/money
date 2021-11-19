@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
+import android.util.Log
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.cwd.money.R
+import com.cwd.money.utils.startActivity
 
 
 class LaunchActivity : AppCompatActivity() {
@@ -42,6 +45,12 @@ class LaunchActivity : AppCompatActivity() {
             }
         }
 
+        sleep{
+            startActivity<MainActivity>(this)
+        }
+
+
+
     }
 
 
@@ -49,7 +58,8 @@ class LaunchActivity : AppCompatActivity() {
     @Composable
     fun centerLayout(){
         Row(verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center){
+            horizontalArrangement = Arrangement.Center,
+            ){
             canvas()
         }
     }
@@ -64,12 +74,6 @@ class LaunchActivity : AppCompatActivity() {
             }
         }.sendEmptyMessageDelayed(1,100)
     }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
 
     @Composable
     fun canvas(){
