@@ -24,31 +24,12 @@ sealed class Screen(val route: String, @StringRes val resourceId: Int,val defIma
 }
 
 
-private val labels = arrayOf("单股", "精选", "全球", "我的")
 val items = listOf(
     Screen.SingleScreen,
     Screen.EarthScreen,
     Screen.FavoriteScreen,
     Screen.HomeScreen
 )
-
-//导航默认图标集合
-private val defImages =
-    arrayOf(R.mipmap.baseline_single_new_white_24,
-        R.mipmap.baseline_favorite_border_white_24,
-        R.mipmap.baseline_earth_white_24,
-        R.mipmap.baseline_home_white_24
-    )
-
-//导航选中图标集合
-private var selectImages =
-    arrayOf(
-        R.mipmap.baseline_single_new_black_24,
-        R.mipmap.baseline_favorite_border_black_24,
-        R.mipmap.baseline_earth_black_24,
-        R.mipmap.baseline_home_black_24
-    )
-
 
 @Composable
 fun TabScreen() {
