@@ -56,7 +56,7 @@ fun TabScreen() {
     val selectIndex = remember {
         mutableStateOf(0)
     }
-
+    //只能放这，从外面传进来就报错
     val navHostController = rememberNavController()
     Scaffold(
         //设置底部导航栏
