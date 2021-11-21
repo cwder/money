@@ -13,18 +13,18 @@ enum class PageScreen {
 
 @Composable
 fun ComposeNavigation(){
-    val navController = rememberNavController()
-    PageNavHost(navController)
+    PageNavHost()
 }
 
 @Composable
-fun PageNavHost( navController: NavHostController){
+fun PageNavHost(){
+    val navController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = PageScreen.TabScreen.name
     ) {
         composable(PageScreen.TabScreen.name) {
-            TabScreen(navController)
+            TabScreen()
         }
 
     }

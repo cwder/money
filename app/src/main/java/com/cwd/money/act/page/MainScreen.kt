@@ -51,11 +51,13 @@ private var selectImages =
 
 
 @Composable
-fun TabScreen(navHostController: NavHostController) {
+fun TabScreen() {
     //导航选中索引
     val selectIndex = remember {
         mutableStateOf(0)
     }
+
+    val navHostController = rememberNavController()
     Scaffold(
         //设置底部导航栏
         bottomBar = {
@@ -69,6 +71,15 @@ fun TabScreen(navHostController: NavHostController) {
                             selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true ,
                             onClick = {
                                 selectIndex.value = index
+                                navHostController.navigate(screen.route) {
+                                    // Pop up to the start destination of the graph to
+                                    // avoid building up a large stack of destinations
+                                    // on the back stack as users select items
+                                    popUpTo = navHostController.graph.startDestinationId
+                                    // Avoid multiple copies of the same destination when
+                                    // reselecting the same item
+                                    launchSingleTop = true
+                                }
                             },
                             icon = {
                                 when(index){

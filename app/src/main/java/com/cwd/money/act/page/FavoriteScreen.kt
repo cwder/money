@@ -5,5 +5,5 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun FavoriteScreen(){
-    Text("HomeScreen")
+    Text("FavoriteScreen")
 }

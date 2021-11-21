@@ -5,5 +5,5 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun EarthScreen(){
-    Text("HomeScreen")
+    Text("EarthScreen")
 }
