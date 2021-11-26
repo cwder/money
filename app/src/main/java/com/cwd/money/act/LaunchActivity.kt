@@ -100,7 +100,7 @@ class LaunchActivity : AppCompatActivity() {
                     path.close()
                     drawPath(
                         path = path,
-                        color= Red
+                        color= Color(resources.getColor(R.color.purple_200))
                     )
                     drawLine(
                         color = Black,
