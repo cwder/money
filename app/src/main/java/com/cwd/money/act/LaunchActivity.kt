@@ -72,7 +72,7 @@ class LaunchActivity : AppCompatActivity() {
             override fun handleMessage(msg: Message) {
                 block()
             }
-        }.sendEmptyMessageDelayed(1,100)
+        }.sendEmptyMessageDelayed(1,10)
     }
 
     @Composable
