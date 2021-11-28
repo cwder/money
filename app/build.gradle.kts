@@ -80,8 +80,8 @@ dependencies {
         set("retrofit_version","2.9.0")
         set("retrofit_version","2.9.0")
         set("compose_version","1.0.1")
+        set("lifecycle_version","2.4.0")
     }
-
    // implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${ext["kotlin_version"]}")
     implementation ("androidx.datastore:datastore-preferences:${ext["datastore"]}")
@@ -106,5 +106,11 @@ dependencies {
     implementation ("androidx.activity:activity-compose:1.3.0-alpha06")
     implementation ("androidx.compose.runtime:runtime-livedata:${ext["compose_version"]}")
     implementation ("androidx.navigation:navigation-compose:2.4.0-alpha08")
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${ext["lifecycle_version"]}")
+    // ViewModel utilities for Compose
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${ext["lifecycle_version"]}")
+
 
 }
