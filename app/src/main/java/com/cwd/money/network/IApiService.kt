@@ -7,6 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface IApiService
 {
@@ -16,7 +17,7 @@ interface IApiService
          }
     }
 
-    @GET("share")
-    suspend fun requestGetShare(): Share
+    @POST("/money/singleShare")
+    suspend fun requestGetShare(code:String,pageNum:Int,pageSize:Int): List<Share>
 
 }

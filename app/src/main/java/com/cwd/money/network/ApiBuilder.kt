@@ -11,7 +11,7 @@ object ApiBuilder {
 
     private var interceptor: Interceptor? = null
     private lateinit var converterFactory: Converter.Factory
-    private lateinit var url: String
+    private var url: String = "http://47.101.129.61:8899"
 
 
     private val client:Retrofit by lazy {
