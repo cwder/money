@@ -6,6 +6,7 @@ import androidx.compose.material.*
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,13 +19,18 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.cwd.money.R
 import com.cwd.money.utils.toast
+import com.cwd.money.vm.ShareViewModel
 
 @Composable
 fun SingleScreen(){
-    val context = LocalContext.current
+    val viewModel: ShareViewModel = viewModel()
     var inputText by remember{mutableStateOf("")}
+    val res = viewModel.shareData.observeAsState()
+
     MaterialTheme{
         Column(
             modifier = Modifier
@@ -53,7 +59,7 @@ fun SingleScreen(){
                 Spacer(modifier = Modifier.width(10.dp))
                 Button(
                     onClick={
-                        "test".toast(context)
+                        viewModel.reqGetShare(inputText)
                     },
                     modifier = Modifier.weight(1f),
                     content = {Text("搜索")}
