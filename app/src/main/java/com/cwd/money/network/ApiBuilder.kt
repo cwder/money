@@ -5,20 +5,20 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ApiBuilder {
 
     private var interceptor: Interceptor? = null
     private lateinit var converterFactory: Converter.Factory
-    private var url: String = "http://47.101.129.61:8899"
 
 
     private val client:Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(this.url)
+            .baseUrl("http://47.101.129.61:8899")
             .client(createOkHttpClient())
-            .addConverterFactory(this.converterFactory)
+            .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }
 
@@ -47,8 +47,5 @@ object ApiBuilder {
     fun <T> build(service: Class<T>): T {
         return client.create(service)
     }
-
-
-
 
 }

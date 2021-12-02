@@ -4,7 +4,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class SingleShareRequest(
-    val code:Int,
+    val code:String,
     val pageNum:Int,
     val pageSize:Int
 )

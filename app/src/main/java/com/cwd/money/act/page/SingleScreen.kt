@@ -30,7 +30,7 @@ fun SingleScreen(){
     val viewModel: ShareViewModel = viewModel()
     var inputText by remember{mutableStateOf("")}
     val res = viewModel.shareData.observeAsState()
-
+    val ctx =LocalContext.current
     MaterialTheme{
         Column(
             modifier = Modifier
@@ -59,6 +59,7 @@ fun SingleScreen(){
                 Spacer(modifier = Modifier.width(10.dp))
                 Button(
                     onClick={
+                        "aaa".toast(ctx)
                         viewModel.reqGetShare(inputText)
                     },
                     modifier = Modifier.weight(1f),
