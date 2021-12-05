@@ -2,7 +2,7 @@ package com.cwd.money.vm
 
 import androidx.lifecycle.*
 import com.cwd.money.repositoy.DataRepositoy
-import com.cwd.money.request.bean.Share
+import com.cwd.money.request.bean.ShareRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class ShareViewModel : ViewModel() {
 
-    val shareData = MutableLiveData<List<Share>>()
+    val shareData = MutableLiveData<List<ShareRequest>>()
 
     private val shareRepositoy by lazy {
         DataRepositoy()
@@ -31,7 +31,7 @@ class ShareViewModel : ViewModel() {
              .catch { e->
                     e.printStackTrace()
              }.collect {
-               //shareData.value = it
+               //shareData.value = it.message
             }
         }
     }

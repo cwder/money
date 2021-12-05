@@ -16,7 +16,7 @@ object ApiBuilder {
 
     private val client:Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("http://47.101.129.61:8899")
+            .baseUrl("http://192.168.3.56:8890")
             .client(createOkHttpClient())
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
@@ -30,8 +30,8 @@ object ApiBuilder {
     private fun createOkHttpClient():OkHttpClient{
          return OkHttpClient.Builder()
              .connectTimeout(10,TimeUnit.SECONDS)
-             .readTimeout(10,TimeUnit.SECONDS)
-             .writeTimeout(10,TimeUnit.SECONDS).
+             .readTimeout(60,TimeUnit.SECONDS)
+             .writeTimeout(60,TimeUnit.SECONDS).
              addInterceptor(HttpLoggingInterceptor().apply {
                  this.level = HttpLoggingInterceptor.Level.BODY
              }).apply {

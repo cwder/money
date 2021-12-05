@@ -11,4 +11,6 @@
     <color name="red_color">#FF0000</color>
     <color name="red_orange">#FF4500</color>
     <color name="red_color_b32f31">#B32F31</color>
+    <color name="green_color_71c31f">#71C31F</color>
+    <color name="yellow_color">#FFFF00</color>
 </resources>
