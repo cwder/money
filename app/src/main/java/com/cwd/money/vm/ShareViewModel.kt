@@ -31,7 +31,8 @@ class ShareViewModel : ViewModel() {
              .catch { e->
                     e.printStackTrace()
              }.collect {
-               //shareData.value = it.message
+               val a = it
+                val b = it
             }
         }
     }

@@ -16,7 +16,7 @@ object ApiBuilder {
 
     private val client:Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("http://192.168.3.56:8890")
+            .baseUrl("http://192.168.3.56:8899")
             .client(createOkHttpClient())
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
