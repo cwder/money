@@ -62,12 +62,10 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
-        useIR = true
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.1"
-        kotlinCompilerVersion="1.5.21"
+        kotlinCompilerExtensionVersion = "1.1.1"
     }
 
 
@@ -82,9 +80,9 @@ dependencies {
     val nav_version = "2.3.5"
     val fragment_version = "1.3.6"
     val retrofit_version = "2.9.0"
-    val compose_version = "1.0.1"
+    val compose_version = "1.1.1"
     val lifecycle_version = "2.4.0"
-    val moshi_version = "1.12.0"
+    val moshi_version = "1.13.0"
 
     // implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
@@ -107,7 +105,9 @@ dependencies {
     implementation ("androidx.compose.ui:ui:$compose_version")
     implementation  ("androidx.compose.material:material:$compose_version")
     implementation ("androidx.compose.ui:ui-tooling-preview:$compose_version")
-    implementation ("androidx.activity:activity-compose:1.3.0-alpha06")
+    implementation ("androidx.compose.ui:ui-tooling:$compose_version")
+
+    implementation ("androidx.activity:activity-compose:1.3.1")
     implementation ("androidx.compose.runtime:runtime-livedata:$compose_version")
     implementation ("androidx.navigation:navigation-compose:2.4.0-alpha08")
 
