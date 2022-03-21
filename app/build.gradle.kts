@@ -74,6 +74,7 @@ android {
 dependencies {
 
 
+    implementation(files("lib/mysql-connector-java-5.1.46.jar"))
     val kotlin_version = "1.5.21"
     val kotlin_coroutines_version = "1.5.0"
     val datastore = "1.0.0"
