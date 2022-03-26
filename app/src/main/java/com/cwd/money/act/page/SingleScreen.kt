@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.cwd.money.act.MainActivity
+import com.cwd.money.utils.log
 import com.cwd.money.vm.TableViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -52,7 +53,11 @@ fun Item(){
         modifier = Modifier
             .size(100.dp)
             .clickable(onClick = {
-
+                vm.tables.observe(ctx){
+                    it.forEach { table ->
+                        table.log()
+                    }
+                }
             }),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -62,9 +67,7 @@ fun Item(){
             contentDescription = null,
             modifier = Modifier.size(50.dp,50.dp)
             )
-        Text(text = "delta算法",modifier =
-        Modifier.clickable(onClick = {
-        }))
+        Text(text = "delta算法")
     }
 }
 
