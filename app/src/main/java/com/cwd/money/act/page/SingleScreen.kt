@@ -1,25 +1,26 @@
 package com.cwd.money.act.page
 
-import android.util.Log
-import android.widget.Toast
+
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.cwd.money.utils.MysqlHelper
-import com.cwd.money.utils.toast
-import com.cwd.money.R
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.cwd.money.act.MainActivity
+import com.cwd.money.vm.TableViewModel
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+
+
 val list = listOf<String>("delta","delta","delta")
 
 @Composable
@@ -45,27 +46,50 @@ fun SingleScreen(){
 
 @Composable
 fun Item(){
+    val ctx = LocalContext.current as MainActivity
+    val vm: TableViewModel = viewModel()
     Column(
-        modifier = Modifier.size(100.dp).clickable(onClick = {
-            delta()
-        }),
+        modifier = Modifier
+            .size(100.dp)
+            .clickable(onClick = {
+
+            }),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
         ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_baseline_ac_unit_75),
+            painter = painterResource(id = com.cwd.money.R.drawable.ic_baseline_ac_unit_75),
             contentDescription = null,
             modifier = Modifier.size(50.dp,50.dp)
             )
-        Text(text = "delta算法")
+        Text(text = "delta算法",modifier =
+        Modifier.clickable(onClick = {
+        }))
     }
 }
 
-fun delta(){
-    Log.e("aaa","aaa---")
-    print("aaa")
-    MysqlHelper.begin()
+fun test(){
+   runBlocking {
+       val one = async {
+
+       }
+   }
 }
+
+suspend fun testS():String{
+    delay(500)
+    return "testS"
+}
+
+//fun delta(){
+//
+//    val vm: TableViewModel = viewModel()
+//    val sql = "show tables"
+//    //MysqlHelper.test()
+//    //val job: kotlinx.coroutines.Job= MysqlHelper.begin(sql)
+//    //val res = job.wait()
+//}
+
 @Preview
 @Composable
 fun Preview() {

@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-
 val kotlin_version = "1.5.21"
 val kotlin_coroutines_version = "1.5.0"
 val datastore = "1.0.0"
@@ -84,6 +82,7 @@ dependencies {
     val compose_version = "1.1.1"
     val lifecycle_version = "2.4.0"
     val moshi_version = "1.13.0"
+    val ktorm_version = "3.2.0"
 
     // implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
@@ -145,5 +144,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-moshi:$retrofit_version")
     implementation ("com.squareup.moshi:moshi:$moshi_version")
     kapt ("com.squareup.moshi:moshi-kotlin-codegen:$moshi_version")
+
+    implementation ("org.ktorm:ktorm-core:${ktorm_version}")
 
 }
