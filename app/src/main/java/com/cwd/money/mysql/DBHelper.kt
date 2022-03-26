@@ -1,5 +1,7 @@
 package com.cwd.money.mysql
 
+import com.cwd.money.mysql.table.ShareInfo
+import com.cwd.money.utils.wrapShare
 import java.sql.DriverManager
 import java.sql.ResultSet
 
@@ -22,6 +24,18 @@ object DBHelper {
         while (rs.next()){
             val name = rs.getString(1)
             list.add(name)
+        }
+        return list
+    }
+
+    suspend fun singleTable(name:String):List<ShareInfo>{
+        val sql = "select * from $name"
+        val list = mutableListOf<ShareInfo>()
+        val st = database.createStatement()
+        val rs: ResultSet = st.executeQuery(sql)
+        while (rs.next()){
+            val info = rs.wrapShare()
+            list.add(info)
         }
         return list
     }
