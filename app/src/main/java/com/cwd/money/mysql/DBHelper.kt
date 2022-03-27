@@ -30,7 +30,9 @@ object DBHelper {
         val rs: ResultSet = st.executeQuery(sql)
         while (rs.next()){
             val name = rs.getString(1)
-            list.add(name)
+            if(name != "delta"){
+                list.add(name)
+            }
         }
         rs.close()
         return list
@@ -49,13 +51,14 @@ object DBHelper {
 
     suspend fun addDelta(info: DeltaInfo){
         val date = info.shareInfo.date
-        val sql = "insert into delta(date,code,low_count,open,high" +
+        val sql = "insert into delta(date,code,low_count,open,high,low" +
                 ",close,preclose,volume,amount,adjustflag,turn,tradestatus" +
                 ",pctChg,peTTM,pbMRQ,psTTM,pcfNcfTTM,isST)values('" + info.shareInfo.date +
                 "','" + info.shareInfo.code +
                 "','" + info.count +
                 "','" + info.shareInfo.open +
                 "','" + info.shareInfo.high +
+                "','" + info.shareInfo.low +
                 "','" + info.shareInfo.close +
                 "','" + info.shareInfo.preclose +
                 "','" + info.shareInfo.volume +
@@ -69,6 +72,8 @@ object DBHelper {
                 "','" + info.shareInfo.psTTM +
                 "','" + info.shareInfo.pcfNcfTTM +
                 "','"+ info.shareInfo.isST + "')";
+
+        st.executeUpdate(sql)
     }
 
 }
