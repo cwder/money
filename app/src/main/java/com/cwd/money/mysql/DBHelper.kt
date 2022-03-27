@@ -1,5 +1,6 @@
 package com.cwd.money.mysql
 
+import com.cwd.money.mysql.table.DeltaInfo
 import com.cwd.money.mysql.table.ShareInfo
 import com.cwd.money.utils.wrapShare
 import java.sql.DriverManager
@@ -12,24 +13,30 @@ object DBHelper {
     val user = "root"
     val password = "de468b87db95db61"
 
-    val database by lazy {
+//    val database by lazy {
+//        Class.forName(diver);
+//        DriverManager.getConnection(url,user,password);//获取连接
+//    }
+
+    val st:Statement by lazy {
         Class.forName(diver);
-        DriverManager.getConnection(url,user,password);//获取连接
+        val conn = DriverManager.getConnection(url,user,password);//获取连接
+        conn.createStatement()
     }
 
     suspend fun allTable():List<String>{
         val sql = "show tables"
         val list = mutableListOf<String>()
-        val st = database.createStatement()
         val rs: ResultSet = st.executeQuery(sql)
         while (rs.next()){
             val name = rs.getString(1)
             list.add(name)
         }
+        rs.close()
         return list
     }
 
-    suspend fun singleTable(name:String,st: Statement):MutableList<ShareInfo>{
+    suspend fun singleTable(name:String):MutableList<ShareInfo>{
         val sql = "select * from $name order by date desc"
         val list = mutableListOf<ShareInfo>()
         val rs: ResultSet = st.executeQuery(sql)
@@ -38,6 +45,30 @@ object DBHelper {
             list.add(info)
         }
         return list
+    }
+
+    suspend fun addDelta(info: DeltaInfo){
+        val date = info.shareInfo.date
+        val sql = "insert into delta(date,code,low_count,open,high" +
+                ",close,preclose,volume,amount,adjustflag,turn,tradestatus" +
+                ",pctChg,peTTM,pbMRQ,psTTM,pcfNcfTTM,isST)values('" + info.shareInfo.date +
+                "','" + info.shareInfo.code +
+                "','" + info.count +
+                "','" + info.shareInfo.open +
+                "','" + info.shareInfo.high +
+                "','" + info.shareInfo.close +
+                "','" + info.shareInfo.preclose +
+                "','" + info.shareInfo.volume +
+                "','" + info.shareInfo.amount +
+                "','" + info.shareInfo.adjustflag +
+                "','" + info.shareInfo.turn +
+                "','" + info.shareInfo.tradestatus +
+                "','" + info.shareInfo.pctChg +
+                "','" + info.shareInfo.peTTM +
+                "','" + info.shareInfo.pbMRQ +
+                "','" + info.shareInfo.psTTM +
+                "','" + info.shareInfo.pcfNcfTTM +
+                "','"+ info.shareInfo.isST + "')";
     }
 
 }
