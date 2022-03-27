@@ -6,6 +6,7 @@ data class ShareInfo(
     var code:String,
     var open:Float,
     var high:Float,
+    var close:Float,
     var preclose:Float,
     var volume:Long,
     var amount:Long,

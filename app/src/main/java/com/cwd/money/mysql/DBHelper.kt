@@ -4,6 +4,7 @@ import com.cwd.money.mysql.table.ShareInfo
 import com.cwd.money.utils.wrapShare
 import java.sql.DriverManager
 import java.sql.ResultSet
+import java.sql.Statement
 
 object DBHelper {
     val diver = "com.mysql.jdbc.Driver"
@@ -28,10 +29,9 @@ object DBHelper {
         return list
     }
 
-    suspend fun singleTable(name:String):List<ShareInfo>{
-        val sql = "select * from $name"
+    suspend fun singleTable(name:String,st: Statement):MutableList<ShareInfo>{
+        val sql = "select * from $name order by date desc"
         val list = mutableListOf<ShareInfo>()
-        val st = database.createStatement()
         val rs: ResultSet = st.executeQuery(sql)
         while (rs.next()){
             val info = rs.wrapShare()

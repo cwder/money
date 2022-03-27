@@ -27,8 +27,12 @@ fun Any.toast(context: Context,duration:Int = Toast.LENGTH_LONG):Toast{
     }
 }
 
+fun log(txt:String){
+    Log.i("money-a",txt.toString())
+}
+
 fun Any.log(){
-    Log.e("aaa",this.toString())
+    Log.i("money-a",this.toString())
 }
 
 fun ResultSet.wrapShare():ShareInfo{
@@ -37,6 +41,7 @@ fun ResultSet.wrapShare():ShareInfo{
     val code = this.getString("code")
     val open = this.getFloat("open")
     val high = this.getFloat("high")
+    val close = this.getFloat("close")
     val preclose = this.getFloat("preclose")
     val volume = this.getLong("volume")
     val amount = this.getLong("amount")
@@ -55,6 +60,7 @@ fun ResultSet.wrapShare():ShareInfo{
         code,
         open,
         high,
+        close,
         preclose,
         volume,
         amount,

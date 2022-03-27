@@ -19,7 +19,7 @@ class TableViewModel(application: Application): AndroidViewModel(application) {
     fun precessDelta(){
         viewModelScope.launch{
             withContext(Dispatchers.IO){
-                Delta.bLine("sh000001")
+                Delta.findAll()
             }
         }
     }

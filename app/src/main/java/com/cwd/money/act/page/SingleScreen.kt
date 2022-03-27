@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.cwd.money.act.MainActivity
+import com.cwd.money.utils.log
 import com.cwd.money.vm.TableViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -25,6 +26,7 @@ val list = listOf<String>("delta","delta","delta")
 
 @Composable
 fun SingleScreen(){
+
     val nRows = list.size % 3 + 1
     val nColumns = 3
     LazyColumn(
@@ -52,6 +54,7 @@ fun Item(){
         modifier = Modifier
             .size(100.dp)
             .clickable(onClick = {
+                "onclick".log()
                 vm.precessDelta()
             }),
         verticalArrangement = Arrangement.Center,
