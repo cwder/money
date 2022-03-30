@@ -1,6 +1,5 @@
 package com.cwd.money.mysql
 
-import com.cwd.money.mysql.table.DeltaInfo
 import com.cwd.money.mysql.table.ShareInfo
 import com.cwd.money.utils.wrapShare
 import java.sql.DriverManager
@@ -13,10 +12,8 @@ object DBHelper {
     val user = "root"
     val password = "de468b87db95db61"
 
-//    val database by lazy {
-//        Class.forName(diver);
-//        DriverManager.getConnection(url,user,password);//获取连接
-//    }
+
+
 
     val st:Statement by lazy {
         Class.forName(diver);
@@ -30,7 +27,7 @@ object DBHelper {
         val rs: ResultSet = st.executeQuery(sql)
         while (rs.next()){
             val name = rs.getString(1)
-            if(name != "delta"){
+            if(name != "delta" && name != "zygote"){
                 list.add(name)
             }
         }
@@ -46,34 +43,12 @@ object DBHelper {
             val info = rs.wrapShare()
             list.add(info)
         }
+        rs.close()
         return list
     }
 
-    suspend fun addDelta(info: DeltaInfo){
-        val date = info.shareInfo.date
-        val sql = "insert into delta(date,code,low_count,open,high,low" +
-                ",close,preclose,volume,amount,adjustflag,turn,tradestatus" +
-                ",pctChg,peTTM,pbMRQ,psTTM,pcfNcfTTM,isST)values('" + info.shareInfo.date +
-                "','" + info.shareInfo.code +
-                "','" + info.count +
-                "','" + info.shareInfo.open +
-                "','" + info.shareInfo.high +
-                "','" + info.shareInfo.low +
-                "','" + info.shareInfo.close +
-                "','" + info.shareInfo.preclose +
-                "','" + info.shareInfo.volume +
-                "','" + info.shareInfo.amount +
-                "','" + info.shareInfo.adjustflag +
-                "','" + info.shareInfo.turn +
-                "','" + info.shareInfo.tradestatus +
-                "','" + info.shareInfo.pctChg +
-                "','" + info.shareInfo.peTTM +
-                "','" + info.shareInfo.pbMRQ +
-                "','" + info.shareInfo.psTTM +
-                "','" + info.shareInfo.pcfNcfTTM +
-                "','"+ info.shareInfo.isST + "')";
 
-        st.executeUpdate(sql)
-    }
+
+
 
 }

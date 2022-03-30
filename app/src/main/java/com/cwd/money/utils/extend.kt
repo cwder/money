@@ -41,6 +41,7 @@ fun ResultSet.wrapShare():ShareInfo{
     val code = this.getString("code")
     val open = this.getFloat("open")
     val high = this.getFloat("high")
+    val low = this.getFloat("low")
     val close = this.getFloat("close")
     val preclose = this.getFloat("preclose")
     val volume = this.getLong("volume")
@@ -60,6 +61,7 @@ fun ResultSet.wrapShare():ShareInfo{
         code,
         open,
         high,
+        low,
         close,
         preclose,
         volume,
@@ -75,3 +77,4 @@ fun ResultSet.wrapShare():ShareInfo{
         isST
     )
 }
+
