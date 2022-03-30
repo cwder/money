@@ -9,7 +9,7 @@ object Delta : Base() {
 
     /*
     * create table delta (id int primary key auto_increment,date date,
-                              code varchar(15),low_count int,turn_ten int ,turn_twn int ,turn_thirty int ,turn_ot int ,open float,high float,
+                              code varchar(15),low_count int,turn_ten float ,turn_twn float ,turn_thirty float ,turn_ot float ,open float,high float,
                               low float,close float,preclose float,volume int unsigned,amount int unsigned,adjustflag tinyint,turn float,
                               tradestatus tinyint,pctChg float,peTTM float,pbMRQ float,psTTM float,
                               pcfNcfTTM float,isST int,create_time datetime NOT NULL DEFAULT NOW())
@@ -23,11 +23,11 @@ object Delta : Base() {
 
         var count = 0
 
-        var turnTen:Int = 0
-        var turnTwn:Int = 0
-        var turnThirty:Int = 0
-        var turnOt:Int  = 0
-        var turnCount:Int = 0
+        var turnTen:Float = 0f
+        var turnTwn:Float = 0f
+        var turnThirty:Float = 0f
+        var turnOt:Float  = 0f
+        var turnCount:Float = 0f
 
         for((index,item) in data.withIndex()){
             if(item.close < target.close){
@@ -82,7 +82,7 @@ object Delta : Base() {
 
     suspend fun addDelta(info: DeltaInfo){
         val date = info.shareInfo.date
-        val sql = "insert into delta(date,code,low_count,turn_ten,turn_twn,turn_thirty,turn_ot,low_count,open,high,low" +
+        val sql = "insert into delta(date,code,low_count,turn_ten,turn_twn,turn_thirty,turn_ot,open,high,low" +
                 ",close,preclose,volume,amount,adjustflag,turn,tradestatus" +
                 ",pctChg,peTTM,pbMRQ,psTTM,pcfNcfTTM,isST)values('" + info.shareInfo.date +
                 "','" + info.shareInfo.code +
@@ -107,7 +107,7 @@ object Delta : Base() {
                 "','" + info.shareInfo.psTTM +
                 "','" + info.shareInfo.pcfNcfTTM +
                 "','"+ info.shareInfo.isST + "')";
-
+        sql.log()
         DBHelper.st.executeUpdate(sql)
     }
 

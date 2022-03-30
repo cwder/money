@@ -12,7 +12,7 @@ data class ShareInfo(
     var volume:Long,
     var amount:Long,
     var adjustflag:Int,
-    var turn:Int,
+    var turn:Float,
     var tradestatus:Int,
     var pctChg:Int,
     var peTTM:Int,

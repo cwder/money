@@ -47,7 +47,7 @@ fun ResultSet.wrapShare():ShareInfo{
     val volume = this.getLong("volume")
     val amount = this.getLong("amount")
     val adjustflag = this.getInt("adjustflag")
-    val turn = this.getInt("turn")
+    val turn = this.getFloat("turn")
     val tradestatus = this.getInt("tradestatus")
     val pctChg = this.getInt("pctChg")
     val peTTM = this.getInt("peTTM")
