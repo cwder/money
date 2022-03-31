@@ -21,6 +21,10 @@ object Delta : Base() {
         val data = DBHelper.singleTable(table)
         val target:ShareInfo = data[0]
 
+        if(target.isST == 1){
+            return false
+        }
+
         var count = 0
 
         var turnTen:Float = 0f
