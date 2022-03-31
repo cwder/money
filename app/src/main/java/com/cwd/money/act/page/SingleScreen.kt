@@ -14,7 +14,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.cwd.money.act.MainActivity
+import com.cwd.money.act.Screen
 import com.cwd.money.utils.log
 import com.cwd.money.vm.TableViewModel
 import kotlinx.coroutines.async
@@ -25,7 +27,7 @@ import kotlinx.coroutines.runBlocking
 val list = listOf<String>("delta","delta","delta")
 
 @Composable
-fun SingleScreen(){
+fun SingleScreen(navController: NavHostController){
 
     val nRows = list.size % 3 + 1
     val nColumns = 3
@@ -40,22 +42,24 @@ fun SingleScreen(){
                .fillMaxWidth(),
                horizontalArrangement = Arrangement.SpaceEvenly
            ) {
-               Item()
+               Item{
+                   navController.navigate(Screen.DeltaPage.route)
+               }
            }
         }
     }
 }
 
 @Composable
-fun Item(){
+fun Item(go:(() -> Unit)){
     val ctx = LocalContext.current as MainActivity
     val vm: TableViewModel = viewModel()
     Column(
         modifier = Modifier
             .size(100.dp)
             .clickable(onClick = {
-                "onclick".log()
-                vm.precessDelta()
+                "aaa".log()
+                go()
             }),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -94,7 +98,7 @@ suspend fun testS():String{
 @Preview
 @Composable
 fun Preview() {
-    SingleScreen()
+    //SingleScreen()
 }
 
 
