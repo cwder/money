@@ -4,8 +4,9 @@ buildscript {
     val nav_version = "2.4.1"
 
     repositories {
-        google()
         mavenCentral()
+        maven ("https://maven.aliyun.com/repository/public")
+        maven ("https://maven.aliyun.com/repository/google")
     }
     dependencies {
         classpath ("com.android.tools.build:gradle:7.1.2")

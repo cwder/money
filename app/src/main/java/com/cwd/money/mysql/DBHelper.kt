@@ -2,6 +2,7 @@ package com.cwd.money.mysql
 
 import com.cwd.money.mysql.table.ShareInfo
 import com.cwd.money.utils.wrapShare
+import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet
 import java.sql.Statement
@@ -13,15 +14,16 @@ object DBHelper {
     val password = "de468b87db95db61"
 
 
-
+    val conn: Connection by lazy {
+        Class.forName(diver);
+        DriverManager.getConnection(url,user,password);//获取连接
+    }
 
     val st:Statement by lazy {
-        Class.forName(diver);
-        val conn = DriverManager.getConnection(url,user,password);//获取连接
         conn.createStatement()
     }
 
-    suspend fun allTable():List<String>{
+    fun allTable():List<String>{
         val sql = "show tables"
         val list = mutableListOf<String>()
         val rs: ResultSet = st.executeQuery(sql)
@@ -35,7 +37,7 @@ object DBHelper {
         return list
     }
 
-    suspend fun singleTable(name:String):MutableList<ShareInfo>{
+    fun singleTable(name:String):MutableList<ShareInfo>{
         val sql = "select * from $name order by date desc"
         val list = mutableListOf<ShareInfo>()
         val rs: ResultSet = st.executeQuery(sql)
@@ -48,7 +50,10 @@ object DBHelper {
     }
 
 
-
+    fun close(){
+        st?.close()
+        conn?.close()
+    }
 
 
 }

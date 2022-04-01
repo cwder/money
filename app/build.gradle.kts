@@ -83,6 +83,7 @@ dependencies {
     val lifecycle_version = "2.4.0"
     val moshi_version = "1.13.0"
     val ktorm_version = "3.2.0"
+    val work_version = "2.7.1"
 
     // implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
@@ -136,15 +137,13 @@ dependencies {
 
     // optional - ReactiveStreams support for LiveData
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version")
-
-
-
-
-
     implementation ("com.squareup.retrofit2:converter-moshi:$retrofit_version")
     implementation ("com.squareup.moshi:moshi:$moshi_version")
     kapt ("com.squareup.moshi:moshi-kotlin-codegen:$moshi_version")
 
     implementation ("org.ktorm:ktorm-core:${ktorm_version}")
+
+    implementation("androidx.work:work-runtime:$work_version")
+    implementation("androidx.work:work-runtime-ktx:$work_version")
 
 }
