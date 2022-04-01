@@ -17,7 +17,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.cwd.money.act.MainActivity
 import com.cwd.money.act.Screen
-import com.cwd.money.utils.log
 import com.cwd.money.vm.TableViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -58,7 +57,6 @@ fun Item(go:(() -> Unit)){
         modifier = Modifier
             .size(100.dp)
             .clickable(onClick = {
-                "aaa".log()
                 go()
             }),
         verticalArrangement = Arrangement.Center,
