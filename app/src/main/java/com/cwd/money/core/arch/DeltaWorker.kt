@@ -10,9 +10,13 @@ import com.cwd.money.mysql.table.ShareInfo
 import com.cwd.money.utils.log
 
 class DeltaWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+
+    var bLine:Int = 100
+
     @SuppressLint("RestrictedApi")
     override fun doWork(): Result {
         try {
+            bLine = inputData.getInt("bLine",100)
             clean()
             findAll()
             return Result.Success()
@@ -66,7 +70,7 @@ class DeltaWorker(context: Context, workerParams: WorkerParameters) : Worker(con
         if(data.size < 1500){
             return false
         }
-        var max:Int = data.size / 100
+        var max:Int = data.size / bLine
         if (count < max){
             log("name: " + target.code + " ok " + " max: " + max + " count: " + count)
             val data = DeltaInfo(count, turnTen, turnTwn, turnThirty, turnOt,target)

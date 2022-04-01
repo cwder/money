@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
@@ -53,7 +54,10 @@ fun DeltaScreen(){
 
 fun doWork(ctx:Context){
     "begin".log()
-    val delatRequest: WorkRequest = OneTimeWorkRequestBuilder<DeltaWorker>().build()
+    val data = Data.Builder().putInt("bLine",100).build()
+    val delatRequest: WorkRequest = OneTimeWorkRequestBuilder<DeltaWorker>()
+        .setInputData(data)
+        .build()
     val workManager: WorkManager = WorkManager.getInstance(ctx)
     workManager.enqueue(delatRequest)
 }
