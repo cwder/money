@@ -24,31 +24,42 @@ fun DeltaScreen(){
         .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
         ) {
-        Row(modifier = Modifier.fillMaxWidth().padding(10.dp),horizontalArrangement = Arrangement.Center){
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp),horizontalArrangement = Arrangement.Center){
             Text(text = "低部股价，换手率高")
         }
-        Row(modifier = Modifier.fillMaxWidth().padding(10.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
+        Row(modifier = Modifier
+            .fillMaxWidth()) {
+            Row(
+                modifier = Modifier.padding(5.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
             ){
-            Button(onClick = {
-                doWork(ctx)
-            },modifier = Modifier
-                .height(50.dp).width(200.dp),
-            ) {
-                Text(text = "启动插入任务")
+                Button(onClick = {
+                    doWork(ctx)
+                },modifier = Modifier
+                    .height(50.dp)
+                    .width(200.dp),
+                ) {
+                    Text(text = "启动插入任务")
+                }
+            }
+            Row(
+                modifier = Modifier.padding(5.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Button(onClick = { /*TODO*/ },modifier = Modifier
+                    .height(50.dp)
+                    .width(200.dp),
+                ) {
+                    Text(text = "更新数据")
+                }
             }
         }
-        Row(modifier = Modifier.fillMaxWidth().padding(10.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
-            ){
-            Button(onClick = { /*TODO*/ },modifier = Modifier
-                .height(50.dp).width(200.dp),
-            ) {
-                Text(text = "更新数据")
-            }
-        }
+
+
     }
 }
 
