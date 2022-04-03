@@ -11,14 +11,16 @@ import com.cwd.money.utils.log
 
 class DeltaWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
-    var bLine:Int = 100
+    var bLine:Int = 80
 
     @SuppressLint("RestrictedApi")
     override fun doWork(): Result {
         try {
+            "begin".log()
             bLine = inputData.getInt("bLine",100)
             clean()
             findAll()
+            "end".log()
             return Result.Success()
         } catch (e: Exception) {
             return Result.failure()

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -14,11 +15,12 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
 import com.cwd.money.core.arch.DeltaWorker
-import com.cwd.money.utils.log
+import com.cwd.money.core.arch.DeltaWorkerMgr
 
 @Composable
 fun DeltaScreen(){
     val ctx = LocalContext.current
+    val state = DeltaWorkerMgr.getState(ctx,100).observeAsState()
     Column(modifier = Modifier
         .fillMaxHeight()
         .fillMaxWidth(),
@@ -37,7 +39,7 @@ fun DeltaScreen(){
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Button(onClick = {
-                    doWork(ctx)
+                    DeltaWorkerMgr.begin(ctx = ctx)
                 },modifier = Modifier
                     .height(50.dp)
                     .width(200.dp),
@@ -50,7 +52,9 @@ fun DeltaScreen(){
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                Button(onClick = { /*TODO*/ },modifier = Modifier
+                Button(onClick = {
+                   // state.value?.state?.log()
+                },modifier = Modifier
                     .height(50.dp)
                     .width(200.dp),
                 ) {
@@ -64,7 +68,6 @@ fun DeltaScreen(){
 }
 
 fun doWork(ctx:Context){
-    "begin".log()
     val data = Data.Builder().putInt("bLine",100).build()
     val delatRequest: WorkRequest = OneTimeWorkRequestBuilder<DeltaWorker>()
         .setInputData(data)

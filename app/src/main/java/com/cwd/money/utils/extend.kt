@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
+import com.cwd.money.mysql.table.DeltaViewInfo
 import com.cwd.money.mysql.table.ShareInfo
 import java.sql.ResultSet
 
@@ -33,6 +34,15 @@ fun log(txt:String){
 
 fun Any.log(){
     Log.i("money-a",this.toString())
+}
+
+fun ResultSet.wrapDelta():DeltaViewInfo{
+    val low_count = this.getInt("low_count")
+    val turn_ten = this.getFloat("turn_ten")
+    val turn_twn = this.getFloat("turn_twn")
+    val turn_thirty = this.getFloat("turn_thirty")
+    val turn_ot = this.getFloat("turn_ot")
+    return DeltaViewInfo(low_count,turn_ten,turn_twn,turn_thirty,turn_ot)
 }
 
 fun ResultSet.wrapShare():ShareInfo{
