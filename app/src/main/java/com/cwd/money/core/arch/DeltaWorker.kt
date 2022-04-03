@@ -32,9 +32,12 @@ class DeltaWorker(context: Context, workerParams: WorkerParameters) : Worker(con
 
     fun findAll(){
         val res = mutableListOf<String>()
-        DBHelper.allTable().forEach { name->
-            name.log()
-            bLine(name)
+        val tables = DBHelper.allTable()
+        tables.size.log()
+        for((index,item) in tables.withIndex()){
+            index.log()
+            item.log()
+            bLine(item)
         }
         DBHelper.close()
 

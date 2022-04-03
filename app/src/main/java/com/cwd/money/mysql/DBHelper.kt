@@ -23,7 +23,7 @@ object DBHelper {
         conn.createStatement()
     }
 
-    fun allTable():List<String>{
+    fun allTable():MutableList<String>{
         val sql = "show tables"
         val list = mutableListOf<String>()
         val rs: ResultSet = st.executeQuery(sql)

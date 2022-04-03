@@ -6,21 +6,32 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
 import com.cwd.money.core.arch.DeltaWorker
 import com.cwd.money.core.arch.DeltaWorkerMgr
+import com.cwd.money.utils.log
+import com.cwd.money.vm.DeltaViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @Composable
 fun DeltaScreen(){
+
+    val vm:DeltaViewModel = viewModel()
+
     val ctx = LocalContext.current
     val state = DeltaWorkerMgr.getState(ctx,100).observeAsState()
+
+    val scope = rememberCoroutineScope()
     Column(modifier = Modifier
         .fillMaxHeight()
         .fillMaxWidth(),
@@ -53,7 +64,15 @@ fun DeltaScreen(){
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Button(onClick = {
-                   // state.value?.state?.log()
+                    state.value?.state?.log()
+                    scope.launch {
+                        vm.getDeltaInfo().collect {
+                            it.forEach {
+                                it.log()
+                            }
+                        }
+
+                    }
                 },modifier = Modifier
                     .height(50.dp)
                     .width(200.dp),
