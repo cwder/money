@@ -19,6 +19,7 @@ import androidx.work.WorkRequest
 import com.cwd.money.core.arch.DeltaWorker
 import com.cwd.money.core.arch.DeltaWorkerMgr
 import com.cwd.money.utils.log
+import com.cwd.money.utils.toast
 import com.cwd.money.vm.DeltaViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -43,7 +44,10 @@ fun DeltaScreen(){
             Text(text = "低部股价，换手率高")
         }
         Row(modifier = Modifier
-            .fillMaxWidth()) {
+            .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+            ) {
             Row(
                 modifier = Modifier.padding(5.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly,
@@ -53,9 +57,24 @@ fun DeltaScreen(){
                     DeltaWorkerMgr.begin(ctx = ctx)
                 },modifier = Modifier
                     .height(50.dp)
-                    .width(200.dp),
+                    .wrapContentWidth(),
                 ) {
                     Text(text = "启动插入任务")
+                }
+            }
+            Row(
+                modifier = Modifier.padding(5.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Button(onClick = {
+                    state.value?.state?.log()
+                    state.value?.state?.toast(ctx)
+                },modifier = Modifier
+                    .height(50.dp)
+                    .wrapContentWidth(),
+                ) {
+                    Text(text = "查看状态")
                 }
             }
             Row(
@@ -75,7 +94,7 @@ fun DeltaScreen(){
                     }
                 },modifier = Modifier
                     .height(50.dp)
-                    .width(200.dp),
+                    .wrapContentWidth(),
                 ) {
                     Text(text = "更新数据")
                 }
