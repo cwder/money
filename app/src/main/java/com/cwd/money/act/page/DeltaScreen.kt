@@ -12,10 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.work.Data
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.WorkRequest
+import androidx.work.*
+import com.cwd.money.act.BaseActivity
 import com.cwd.money.core.arch.DeltaWorker
 import com.cwd.money.core.arch.DeltaWorkerMgr
 import com.cwd.money.utils.log
@@ -54,7 +52,7 @@ fun DeltaScreen(){
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Button(onClick = {
-                    DeltaWorkerMgr.begin(ctx = ctx)
+                    DeltaWorkerMgr.begin(ctx as BaseActivity)
                 },modifier = Modifier
                     .height(50.dp)
                     .wrapContentWidth(),
@@ -85,12 +83,13 @@ fun DeltaScreen(){
                 Button(onClick = {
                     state.value?.state?.log()
                     scope.launch {
-                        vm.getDeltaInfo().collect {
-                            it.forEach {
-                                it.log()
+                        if(state.value?.state != WorkInfo.State.RUNNING){
+                            vm.getDeltaInfo().collect {
+                                it.forEach {
+                                    it.log()
+                                }
                             }
                         }
-
                     }
                 },modifier = Modifier
                     .height(50.dp)

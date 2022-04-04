@@ -8,6 +8,7 @@ import com.cwd.money.mysql.DBHelper
 import com.cwd.money.mysql.table.DeltaInfo
 import com.cwd.money.mysql.table.ShareInfo
 import com.cwd.money.utils.log
+import java.lang.Thread.sleep
 
 class DeltaWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
@@ -20,6 +21,7 @@ class DeltaWorker(context: Context, workerParams: WorkerParameters) : Worker(con
             bLine = inputData.getInt("bLine",100)
             clean()
             findAll()
+            sleep(1000)
             "end".log()
             return Result.Success()
         } catch (e: Exception) {
