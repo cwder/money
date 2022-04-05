@@ -12,7 +12,7 @@ import java.lang.Thread.sleep
 
 class DeltaWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
-    var bLine:Int = 80
+    var bLine:Int = 100
 
     @SuppressLint("RestrictedApi")
     override fun doWork(): Result {

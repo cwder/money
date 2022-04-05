@@ -5,19 +5,21 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Observer
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.work.*
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 import com.cwd.money.act.BaseActivity
 import com.cwd.money.core.arch.DeltaWorker
 import com.cwd.money.core.arch.DeltaWorkerMgr
 import com.cwd.money.utils.log
-import com.cwd.money.utils.toast
 import com.cwd.money.vm.DeltaViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -28,7 +30,12 @@ fun DeltaScreen(){
     val vm:DeltaViewModel = viewModel()
 
     val ctx = LocalContext.current
-    val state = DeltaWorkerMgr.getState(ctx,100).observeAsState()
+    var txt:String = "init"
+    DeltaWorkerMgr.getState(ctx,50).apply {
+        observe(ctx as BaseActivity,Observer {
+                workStatus -> txt = workStatus.state.toString()
+        } )
+    }
 
     val scope = rememberCoroutineScope()
     Column(modifier = Modifier
@@ -58,6 +65,7 @@ fun DeltaScreen(){
                     .wrapContentWidth(),
                 ) {
                     Text(text = "启动插入任务")
+
                 }
             }
             Row(
@@ -65,15 +73,9 @@ fun DeltaScreen(){
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                Button(onClick = {
-                    state.value?.state?.log()
-                    state.value?.state?.toast(ctx)
-                },modifier = Modifier
+                Text(text = "$txt",modifier = Modifier
                     .height(50.dp)
-                    .wrapContentWidth(),
-                ) {
-                    Text(text = "查看状态")
-                }
+                    .wrapContentWidth())
             }
             Row(
                 modifier = Modifier.padding(5.dp),
@@ -81,13 +83,10 @@ fun DeltaScreen(){
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Button(onClick = {
-                    state.value?.state?.log()
                     scope.launch {
-                        if(state.value?.state != WorkInfo.State.RUNNING){
-                            vm.getDeltaInfo().collect {
-                                it.forEach {
-                                    it.log()
-                                }
+                        vm.getDeltaInfo().collect {
+                            it.forEach {
+                                it.log()
                             }
                         }
                     }
