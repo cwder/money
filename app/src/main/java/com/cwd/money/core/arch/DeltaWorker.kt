@@ -8,7 +8,8 @@ import com.cwd.money.mysql.DBHelper
 import com.cwd.money.mysql.table.DeltaInfo
 import com.cwd.money.mysql.table.ShareInfo
 import com.cwd.money.utils.log
-import java.lang.Thread.sleep
+import com.cwd.money.utils.wrapShare
+import java.sql.ResultSet
 
 class DeltaWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
@@ -21,7 +22,6 @@ class DeltaWorker(context: Context, workerParams: WorkerParameters) : Worker(con
             bLine = inputData.getInt("bLine",100)
             clean()
             findAll()
-            sleep(1000)
             "end".log()
             return Result.Success()
         } catch (e: Exception) {
@@ -33,7 +33,6 @@ class DeltaWorker(context: Context, workerParams: WorkerParameters) : Worker(con
 
 
     fun findAll(){
-        val res = mutableListOf<String>()
         val tables = DBHelper.allTable()
         tables.size.log()
         for((index,item) in tables.withIndex()){
@@ -41,29 +40,32 @@ class DeltaWorker(context: Context, workerParams: WorkerParameters) : Worker(con
             item.log()
             bLine(item)
         }
+        rs.close()
         DBHelper.close()
 
     }
 
+    var data:MutableList<ShareInfo> = mutableListOf()
+    lateinit var rs: ResultSet
     fun bLine(table:String):Boolean{
-
-        val data = DBHelper.singleTable(table)
-        val target: ShareInfo = data[0]
-
-        if(target.isST == 1){
+        data?.clear()
+        val sql = "select * from $table order by date desc"
+        rs = DBHelper.st.executeQuery(sql)
+        while (rs.next()){
+            "4".log()
+            data.add(rs.wrapShare())
+        }
+        if(data[0].isST == 1){
             return false
         }
-
         var count = 0
-
         var turnTen:Float = 0f
         var turnTwn:Float = 0f
         var turnThirty:Float = 0f
         var turnOt:Float  = 0f
         var turnCount:Float = 0f
-
         for((index,item) in data.withIndex()){
-            if(item.close < target.close){
+            if(item.close < data[0].close){
                 count++
             }
             turnCount += item.turn
@@ -79,8 +81,8 @@ class DeltaWorker(context: Context, workerParams: WorkerParameters) : Worker(con
         }
         var max:Int = data.size / bLine
         if (count < max){
-            log("name: " + target.code + " ok " + " max: " + max + " count: " + count)
-            val data = DeltaInfo(count, turnTen, turnTwn, turnThirty, turnOt,target)
+            log("name: " + data[0].code + " ok " + " max: " + max + " count: " + count)
+            val data = DeltaInfo(count, turnTen, turnTwn, turnThirty, turnOt,data[0])
             addDelta(data)
             return true
         }else{

@@ -4,8 +4,7 @@ import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -30,7 +29,7 @@ fun DeltaScreen(){
     val vm:DeltaViewModel = viewModel()
 
     val ctx = LocalContext.current
-    var txt:String = "init"
+    var txt by remember { mutableStateOf("init")}
     DeltaWorkerMgr.getState(ctx,50).apply {
         observe(ctx as BaseActivity,Observer {
                 workStatus -> txt = workStatus.state.toString()
